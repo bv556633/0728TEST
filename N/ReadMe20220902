@@ -1,0 +1,27 @@
+20220902 新增項目
+1.登入 SVID 89 加密於 SVID Table
+2.登入上報206事件，等待PASS或PASSNG
+
+PLCIO
+<Item SVID="89" Port="" Adress="" Length="1" Unit="" Type="A" Scale="" Name="CurrentUserPassword"/>
+<Item SVID="96" Port="" Adress="" Length="1" Unit="" Type="A" Scale="" Name="CurrentUserID"/>
+
+EventLayout
+<VID KGS_TYPE="A" KGS_ITEM_NUMBER="0" KGS_VID_NUMBER="0" ID="89" Unit="" Name="CurrentUserPassword"/>
+<VID KGS_TYPE="A" KGS_ITEM_NUMBER="0" KGS_VID_NUMBER="0" ID="96" Unit="" Name="CurrentUserID"/>
+
+<Event KGS_TYPE="L" KGS_ITEM_NUMBER="2" KGS_VID_NUMBER="2" ID="206" Name="OP Login" Trigger="1">
+            <CEID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">206</CEID>
+            <RPIDs KGS_TYPE="L" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">
+                <RPID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">5206</RPID>
+            </RPIDs>
+        </Event>
+
+  <RPT KGS_TYPE="L" KGS_ITEM_NUMBER="2" KGS_VID_NUMBER="2" ID="5206" Name="OP login">
+            <RPTID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">5206</RPTID>
+            <VIDs KGS_TYPE="L" KGS_ITEM_NUMBER="3" KGS_VID_NUMBER="2">
+                <VID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">10</VID>
+                <VID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">89</VID>
+                <VID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">96</VID>
+            </VIDs>
+        </RPT>
