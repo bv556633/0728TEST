@@ -1,0 +1,78 @@
+20220920 新增項目
+
+Flatten計片修正
+
+Movein視窗初片按鈕改為OCR
+
+OCR按鈕上報事件為240，無塵衣登入上報241，Eventlayout更新如下
+
+ <Event KGS_TYPE="L" KGS_ITEM_NUMBER="2" KGS_VID_NUMBER="2" ID="240" Name="MoveInOCRBt" Trigger="1">
+            <CEID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">240</CEID>
+            <RPIDs KGS_TYPE="L" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">
+                <RPID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">5240</RPID>
+            </RPIDs>
+        </Event>
+
+
+ <RPT KGS_TYPE="L" KGS_ITEM_NUMBER="2" KGS_VID_NUMBER="2" ID="5240" Name="MoveInOCRBtRPT">
+            <RPTID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">5240</RPTID>
+            <VIDs KGS_TYPE="L" KGS_ITEM_NUMBER="3" KGS_VID_NUMBER="6">
+                <VID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">1</VID>
+                <VID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">91</VID>
+                <VID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">92</VID>
+            </VIDs>
+        </RPT>
+
+<Event KGS_TYPE="L" KGS_ITEM_NUMBER="2" KGS_VID_NUMBER="2" ID="241" Name="OPLogin" Trigger="1">
+            <CEID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">241</CEID>
+            <RPIDs KGS_TYPE="L" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">
+                <RPID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">5241</RPID>
+            </RPIDs>
+        </Event>
+        
+        <RPT KGS_TYPE="L" KGS_ITEM_NUMBER="2" KGS_VID_NUMBER="2" ID="5241" Name="OPloginRPT">
+            <RPTID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">5241</RPTID>
+            <VIDs KGS_TYPE="L" KGS_ITEM_NUMBER="2" KGS_VID_NUMBER="2">
+                <VID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">10</VID>
+                <VID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">96</VID>
+            </VIDs>
+        </RPT>
+
+___________________________________________________________________________________________________________
+
+20220914 新增項目
+
+PAUSE & RESUME
+
+修正下PAUSE Lot與數量會不見
+
+
+
+___________________________________________________________________________________________________________
+20220902 新增項目
+1.登入 SVID 89 加密於 SVID Table
+2.登入上報206事件，等待PASS或PASSNG
+
+PLCIO
+<Item SVID="89" Port="" Adress="" Length="1" Unit="" Type="A" Scale="" Name="CurrentUserPassword"/>
+<Item SVID="96" Port="" Adress="" Length="1" Unit="" Type="A" Scale="" Name="CurrentUserID"/>
+
+EventLayout
+<VID KGS_TYPE="A" KGS_ITEM_NUMBER="0" KGS_VID_NUMBER="0" ID="89" Unit="" Name="CurrentUserPassword"/>
+<VID KGS_TYPE="A" KGS_ITEM_NUMBER="0" KGS_VID_NUMBER="0" ID="96" Unit="" Name="CurrentUserID"/>
+
+<Event KGS_TYPE="L" KGS_ITEM_NUMBER="2" KGS_VID_NUMBER="2" ID="206" Name="OP Login" Trigger="1">
+            <CEID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">206</CEID>
+            <RPIDs KGS_TYPE="L" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">
+                <RPID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">5206</RPID>
+            </RPIDs>
+        </Event>
+
+  <RPT KGS_TYPE="L" KGS_ITEM_NUMBER="2" KGS_VID_NUMBER="2" ID="5206" Name="OP login">
+            <RPTID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">5206</RPTID>
+            <VIDs KGS_TYPE="L" KGS_ITEM_NUMBER="3" KGS_VID_NUMBER="2">
+                <VID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">10</VID>
+                <VID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">89</VID>
+                <VID KGS_TYPE="U4" KGS_ITEM_NUMBER="1" KGS_VID_NUMBER="1">96</VID>
+            </VIDs>
+        </RPT>
