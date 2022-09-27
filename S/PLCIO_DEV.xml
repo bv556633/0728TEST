@@ -1,0 +1,325 @@
+﻿<!--
+	<Item Port= "" Adress="" Type="A" Length="1" Scale="0.1" Unit="%" Name="" />
+	[Type] - 解碼型態
+	A : Ascii 解碼
+	D : 十進制解碼
+	H : 十六進制解碼
+	F : 小數點	解碼
+	L : 常整數 流量換算 新長整數 - 舊常整數 *60
+	P : 換算壓力 取值 X 10/65535
+	S : 換算壓力 取值 X 1/65535
+	[Length] - 解碼Word數量
+	若 Type = D 時當長度大於1 則每個Word 對大顯示範圍為 0000-9999
+	
+	Ex : 若長度設定為2時取出的資訊標示為 00000000-99999999
+	W0 = 1234
+	W1 = 5678
+	解析結果 = 12345678
+	
+	[Scale] - 取出來之數值 * 所設定之數值，為實際上報資訊
+	只有 Type 為 D 且長度為 1 時可以使用
+	0.1= 1/10
+	0.01 = 1/100
+	[Unit] - 單位
+	%
+	KW
+	
+	2020/09/18->修改比對的數量增加其他分支的噴壓
+-->
+<DATA>
+	<IOLIST>
+		<Item SVID="1" Port="" Adress="" Length="1" Unit="" Type="D" Scale=""Name="ControlState"/>
+		<Item SVID="10" Port="" Adress="" Length="1" Unit="" Type="A" Scale=""Name="Clock"/>
+		<Item SVID="15" Port="" Adress="" Length="1" Unit="" Type="A" Scale=""Name="PPExecName"/>
+		<Item SVID="20" Port="" Adress="" Length="1" Unit="" Type="D" Scale=""Name="EQPStatus"/>
+		<Item SVID="21" Port="" Adress="" Length="1" Unit="" Type="D" Scale=""Name="PreviousEQPStatus"/>
+		<Item SVID="22" Port="2343" Adress="" Length="1" Unit="" Type="D" Scale=""Name="LoaderLockStatus"/>
+		<Item SVID="25" Port="" Adress="" Length="1" Unit="" Type="F" Scale=""Name="ECID"/>
+		<Item SVID="30" Port="" Adress="" Length="1" Unit="" Type="A" Scale=""Name="EventsEnable"/>
+		<Item SVID="35" Port="" Adress="" Length="1" Unit="" Type="D" Scale=""Name="LampStatus"/>
+		<Item SVID="50" Port="" Adress="" Length="1" Unit="" Type="F" Scale=""Name="AlarmID"/>
+		<Item SVID="51" Port="" Adress="" Length="1" Unit="" Type="A" Scale=""Name="AlarmEnable"/>
+		<Item SVID="52" Port="" Adress="" Length="1" Unit="" Type="A" Scale=""Name="AlarmSet"/>
+        <Item SVID="60" Port="" Adress="" Length="1" Unit="" Type="A" Scale="" Name="ParameterName"/>
+		<Item SVID="61" Port="" Adress="" Length="1" Unit="" Type="A" Scale="" Name="ParameterValue"/>
+		<Item SVID="62" Port="" Adress="" Length="1" Unit="" Type="A" Scale="" Name="ParameterMin"/>
+		<Item SVID="63" Port="" Adress="" Length="1" Unit="" Type="A" Scale="" Name="ParameterMax"/>
+		<Item SVID="70" Port="" Adress="" Length="1" Unit="" Type="A" Scale=""Name="PPChangeName"/>
+		<Item SVID="71" Port="" Adress="" Length="1" Unit="" Type="D" Scale=""Name="PPFormat"/>
+		<Item SVID="80" Port="" Adress="" Length="1" Unit="" Type="A" Scale=""Name="UserID"/>
+		<Item SVID="81" Port="" Adress="" Length="1" Unit="" Type="A" Scale=""Name="EventCode"/>
+		<Item SVID="89" Port="" Adress="" Length="1" Unit="" Type="A" Scale="" Name="CurrentUserPassword"/>
+		<Item SVID="90" Port="" Adress="" Length="1" Unit="" Type="A" Scale=""Name="SubstrateID(PanelID)"/>
+		<Item SVID="91" Port="" Adress="" Length="1" Unit="" Type="A" Scale=""Name="BarcodeLotID"/>
+		<Item SVID="92" Port="" Adress="" Length="1" Unit="" Type="D" Scale=""Name="BoardNumber"/>
+		<Item SVID="93" Port="" Adress="" Length="1" Unit="" Type="D" Scale=""Name="DefectBoardNumber"/>
+		<Item SVID="94" Port="" Adress="" Length="1" Unit="" Type="A" Scale=""Name="DefectCode"/>
+		<Item SVID="95" Port="" Adress="" Length="1" Unit="" Type="A" Scale=""Name="CurrentSelectRecipeNo"/>
+		<Item SVID="96" Port="" Adress="" Length="1" Unit="" Type="A" Scale="" Name="CurrentUserID"/>
+		<Item SVID="100" Port="" Adress="" Length="1" Unit="" Type="A" Scale=""Name="boxNumber"/>
+		<Item SVID="101" Port="" Adress="" Length="1" Unit="" Type="A" Scale=""Name="DefectInformation"/>
+		<!--<Item SVID="301" Port="850" Adress="" Length="1" Unit="" Type="D" Scale=""Name="SaveWaterElectricity" Description="省水省電測試"/>
+		<Item SVID="302" Port="27261" Adress="" Length="1"Unit="" Type="D"	Scale=""Round=""Name="AutoDosingAmount" Description="送液量"/>
+		<Item SVID="303" Port="27271" Adress="" Length="1"Unit="" Type="D"	Scale=""Round=""Name="AutoDosingPanelQuantity" Description="值掛架"/>-->
+		<Item SVID="304" Port="10002" Adress="" Length="1"Unit="" Type="D"	Scale=""Round=""Name="WATER1" Description="省水1"/>
+		<Item SVID="305" Port="10502" Adress="" Length="1"Unit="" Type="D"	Scale=""Round=""Name="WATER2" Description="省水2"/>
+		<Item SVID="306" Port="11002" Adress="" Length="1"Unit="" Type="D"	Scale=""Round=""Name="WATER3" Description="省水3"/>
+		<Item SVID="504001" Port="50002" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7"Round="2" Name="MainTank1Front 1 PressureSV" Description="顯影主槽1前1噴壓力"/>
+		<Item SVID="504044" Port="50003" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7"Round="2" Name="MainTank1Front 2 PressureSV" Description="顯影主槽1前2噴壓力"/>
+		<Item SVID="504045" Port="50004" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7"Round="2" Name="MainTank1Front 3 PressureSV" Description="顯影主槽1前3噴壓力"/>
+		<Item SVID="504046" Port="50005" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7"Round="2" Name="MainTank1Front 4 PressureSV" Description="顯影主槽1前4噴壓力"/>
+		<Item SVID="504047" Port="50006" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7"Round="2" Name="MainTank1Front 5 PressureSV" Description="顯影主槽1前5噴壓力"/>
+		<Item SVID="504002" Port="50007" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.8"Round="2" Name="MainTank1Back 1 PressureSV"  Description="顯影主槽1後1噴壓力"/>
+		<Item SVID="504048" Port="50008" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.8"Round="2" Name="MainTank1Back 2 PressureSV"  Description="顯影主槽1後2噴壓力"/>
+		<Item SVID="504049" Port="50009" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.8"Round="2" Name="MainTank1Back 3 PressureSV"  Description="顯影主槽1後3噴壓力"/>
+		<Item SVID="504050" Port="50011" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.8"Round="2" Name="MainTank1Back 4 PressureSV"  Description="顯影主槽1後4噴壓力"/>
+		<Item SVID="504051" Port="50012" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.8"Round="2" Name="MainTank1Back 5 PressureSV"  Description="顯影主槽1後5噴壓力"/>
+		<Item SVID="504003" Port="40033" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Front 1 PressureSV"  Description="顯影主槽2前1噴壓力"/>
+		<Item SVID="504052" Port="40034" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Front 2 PressureSV"  Description="顯影主槽2前2噴壓力"/>
+		<Item SVID="504053" Port="40035" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Front 3 PressureSV"  Description="顯影主槽2前3噴壓力"/>
+		<Item SVID="504054" Port="40036" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Front 4 PressureSV"  Description="顯影主槽2前4噴壓力"/>
+		<Item SVID="504055" Port="40037" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Front 5 PressureSV"  Description="顯影主槽2前5噴壓力"/>
+		<Item SVID="504004" Port="40039" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Back 1 PressureSV"   Description="顯影主槽2後1噴壓力"/>
+		<Item SVID="504056" Port="40040" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Back 2 PressureSV"   Description="顯影主槽2後2噴壓力"/>
+		<Item SVID="504057" Port="40041" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Back 3 PressureSV"   Description="顯影主槽2後3噴壓力"/>
+		<Item SVID="504058" Port="40042" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Back 4 PressureSV"   Description="顯影主槽2後4噴壓力"/>
+		<Item SVID="504059" Port="40044" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Back 5 PressureSV"   Description="顯影主槽2後5噴壓力"/>
+		<Item SVID="504060" Port="40065" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2-2Front 1 PressureSV"   Description="顯影主槽2-2前1噴壓設定值"/>
+		<Item SVID="504061" Port="40066" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2-2Front 2 PressureSV"   Description="顯影主槽2-2前2噴壓設定值"/>
+		<Item SVID="504062" Port="40067" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2-2Front 3 PressureSV"   Description="顯影主槽2-2前3噴壓設定值"/>
+		<Item SVID="504063" Port="40068" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2-2Back 1 PressureSV"    Description="顯影主槽2-2後1噴壓設定值"/>
+		<Item SVID="504064" Port="40069" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2-2Back 2 PressureSV"    Description="顯影主槽2-2後2噴壓設定值"/>
+		<Item SVID="504065" Port="40070" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2-2Back 3 PressureSV"    Description="顯影主槽2-2後3噴壓設定值"/>
+		<Item SVID="504005" Port="27301" Adress="" Length="1" Unit="℃" Type="F" Scale="0.1"  Round="2"  Name="MainTankTempSV" Description="顯影主槽溫度設定值"/>
+		<Item SVID="504006" Port="40071" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7" Round="2" Name="ServiceTankFront 1 PressureSV" Description="顯影副槽前1噴壓力"/>
+		<Item SVID="504066" Port="40072" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7" Round="2" Name="ServiceTankFront 2 PressureSV" Description="顯影副槽前2噴壓力"/>
+		<Item SVID="504067" Port="40073" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7" Round="2" Name="ServiceTankFront 3 PressureSV" Description="顯影副槽前3噴壓力"/>
+		<Item SVID="504007" Port="40074" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7" Round="2" Name="ServiceTankBack 1 PressureSV"  Description="顯影副槽後1噴壓力"/>
+		<Item SVID="504068" Port="40075" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7" Round="2" Name="ServiceTankBack 2 PressureSV"  Description="顯影副槽後2噴壓力"/>
+		<Item SVID="504069" Port="40076" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7" Round="2" Name="ServiceTankBack 3 PressureSV"  Description="顯影副槽後3噴壓力"/>
+		<Item SVID="504008" Port="27321" Adress="" Length="1" Unit="℃" Type="F" Scale="0.1" Round="2"   Name="ServiceTankTempSV" Description="顯影副槽溫度設定值"/>
+		<Item SVID="504009" Port="41035" Adress="41035" Length="1" Unit="Kg/cm2" Type="S" Scale="10"Round="2"  Name="RoRinsingTank1FrontPressureSV" Description="RO水洗1前噴壓力"/>
+		<Item SVID="504010" Port="41036" Adress="41036" Length="1" Unit="Kg/cm2" Type="S" Scale="10"Round="2"  Name="RoRinsingTank1BackPressureSV" Description="RO水洗1後噴壓力"/>
+		<Item SVID="504011" Port="41037" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10"Round="2"  Name="RoRinsingTank2FrontPressureSV" Description="RO水洗2前噴壓力"/>
+		<Item SVID="504012" Port="41038" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10"Round="2"  Name="RoRinsingTank2BackPressureSV" Description="RO水洗2後噴壓力"/>
+		<Item SVID="504013" Port="41039" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10"Round="2"  Name="RoRinsingTank3FrontPressureSV" Description="RO水洗3前噴壓力"/>
+		<Item SVID="504014" Port="41040" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10"Round="2"  Name="RoRinsingTank3BackPressureSV" Description="RO水洗3後噴壓力"/>
+		<Item SVID="504015" Port="41041" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2"Name="ElectrolyticWaterTank1FrontPressureSV" Description="電解水洗1前噴壓力"/>
+		<Item SVID="504016" Port="41042" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="ElectrolyticWaterTank1BackPressureSV" Description="電解水洗1後噴壓力"/>
+		<Item SVID="504017" Port="41043" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2"Name="ElectrolyticWaterTank2FrontPressureSV"Description="電解水洗2前噴壓力"/>
+		<Item SVID="504018" Port="41044" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="ElectrolyticWaterTank2BackPressureSV"Description="電解水洗2後噴壓力"/>
+		<Item SVID="504019" Port="41065" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="DiRinsingTank1FrontPressureSV"Description="DI水洗1前噴壓力"/>
+		<Item SVID="504020" Port="41066" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="DiRinsingTank1BackPressureSV"Description="DI水洗1後噴壓力"/>
+		<Item SVID="504021" Port="41067" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="DiRinsingTank2FrontPressureSV"Description="DI水洗2前噴壓力"/>
+		<Item SVID="504022" Port="41068" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="DiRinsingTank2BackPressureSV"Description="DI水洗2後噴壓力"/>
+		<Item SVID="504023" Port="26900" Adress="" Length="1" Unit="m/min" Type="F" Scale="0.01 "Round="2" Name="LineSpeedSV"Description="輸送速度設定值"/>
+		<Item SVID="504024" Port="41101" Adress="" Length="1" Unit="us/cm" Type="S" Scale="20" Round="2" Name="DiRinsingTank1ConductivitySV"Description="DI水洗槽1電導度"/>
+		<Item SVID="504025" Port="41102" Adress="" Length="1" Unit="us/cm" Type="S" Scale="20" Round="2" Name="DiRinsingTank2ConductivitySV"Description="DI水洗槽2電導度"/>
+		<Item SVID="504026" Port="41033" Adress="" Length="1" Unit="Kgf/cm2" Type="S" Scale="6.666666666666667" Round="2" Name="RelayTankFrontAirCutPressureSV" Description="前風切差壓力"/>
+		<Item SVID="504027" Port="41034" Adress="" Length="1" Unit="Kgf/cm2" Type="S" Scale="6.666666666666667" Round="2" Name="RelayTankBackAirCutPressureSV" Description="後風切差壓力"/>
+		<Item SVID="504028" Port="41069" Adress="41069" Length="1" Unit="Kpa" Type="S" Scale="11.2" Round="2" Name="BlowAirTank1stFrontAirCutPressureSV"Description="吹乾槽第一組前風刀差壓"/>
+		<Item SVID="504029" Port="41075" Adress="41070" Length="1" Unit="Kpa" Type="S" Scale="10"   Round="2" Name="BlowAirTank1stBackAirCutPressureSV" Description="吹乾槽第一組後風刀差壓"/>
+		<Item SVID="504030" Port="41070" Adress="41071" Length="1" Unit="Kpa" Type="S" Scale="10.4" Round="2" Name="BlowAirTank2ndFrontAirCutPressureSV"Description="吹乾槽第二組前風刀差壓"/>
+		<Item SVID="504031" Port="41097" Adress="41072" Length="1" Unit="Kpa" Type="S" Scale="10.9" Round="2" Name="BlowAirTank2ndBackAirCutPressureSV" Description="吹乾槽第二組後風刀差壓"/>
+		<Item SVID="504032" Port="41071" Adress="41073" Length="1" Unit="Kpa" Type="S" Scale="10" Round="2" Name="BlowAirTank3rdFrontAirCutPressureSV"Description="吹乾槽第三組前風刀差壓"/>
+		<Item SVID="504033" Port="41076" Adress="41074" Length="1" Unit="Kpa" Type="S" Scale="10.3" Round="2" Name="BlowAirTank3rdBackAirCutPressureSV" Description="吹乾槽第三組後風刀差壓"/>
+		<Item SVID="504034" Port="41072" Adress="41075" Length="1" Unit="Kpa" Type="S" Scale="10.4" Round="2" Name="BlowAirTank4thFrontAirCutPressureSV"Description="吹乾槽第四組前風刀差壓"/>
+		<Item SVID="504035" Port="41098" Adress="41076" Length="1" Unit="Kpa" Type="S" Scale="9.5"  Round="2" Name="BlowAirTank4thBackAirCutPressureSV" Description="吹乾槽第四組後風刀差壓"/>
+		<Item SVID="504036" Port="41073" Adress="41097" Length="1" Unit="Kpa" Type="S" Scale="9.1"  Round="2" Name="BlowAirTank5thFrontAirCutPressureSV"Description="吹乾槽第五組前風刀差壓"/>
+		<Item SVID="504037" Port="41099" Adress="41098" Length="1" Unit="Kpa" Type="S" Scale="10.7"   Round="2" Name="BlowAirTank5thBackAirCutPressureSV" Description="吹乾槽第五組後風刀差壓"/>
+		<Item SVID="504038" Port="41074" Adress="41099" Length="1" Unit="Kpa" Type="S" Scale="10.5" Round="2" Name="BlowAirTank6thFrontAirCutPressureSV"Description="吹乾槽第六組前風刀差壓"/>
+		<Item SVID="504039" Port="41100" Adress="41100" Length="1" Unit="Kpa" Type="S" Scale="11"   Round="2" Name="BlowAirTank6thBackAirCutPressureSV" Description="吹乾槽第六組後風刀差壓"/>
+		<Item SVID="504040" Port="27341" Adress="" Length="1" Unit="℃" Type="F" Scale="0.1 "Round="2" Name="DryTankTempSV" Description="顯影烘乾溫度設定值"/>
+		<Item SVID="504041" Port="40005" Adress="" Length="1"Unit="L/min" Type="L"	Scale="0.7453416149068323"Round="2"Name="RinsingTank1stWaterRefreshRateSV" Description="水洗1流量"/>
+		<Item SVID="504042" Port="40003" Adress="" Length="1" Unit="L/min" Type="L" Scale="0.5099679402722881" Round="2"  Name="RinsingTank2ndWaterRefreshRateSV" Description="水洗2流量"/>
+		<Item SVID="504043" Port="40001" Adress="" Length="1"Unit="L/min" Type="L"	Scale="0.4609916450840843"Round="2"Name="RinsingTank3rdWaterRefreshRateSV" Description="水洗3流量"/>		
+	</IOLIST>
+	<ALARMLIST>
+		<Item SVID="" Port="1001" Adress="1" Length="1" Unit="" Type="D" Scale="" Name="ALARM1"/>
+	</ALARMLIST>
+	<PPIDLIST>
+		<Item RecipeCount="1" OffSet="0" RecipeName="RECIPE_NAME"/>
+	</PPIDLIST>
+	<PPIDBODY>
+		<Item SVID="" Port="" Adress="" Length="1" Unit="" Type="A" Scale="" Name="RECIPE_NAME"/>
+		<Item SVID="504001" Port="50002" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7"Round="2" Name="MainTank1Front 1 PressureSV" Description="顯影主槽1前1噴壓力"/>
+		<!--<Item SVID="504044" Port="50003" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7"Round="2" Name="MainTank1Front 2 PressureSV" Description="顯影主槽1前2噴壓力"/>
+		<Item SVID="504045" Port="50004" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7"Round="2" Name="MainTank1Front 3 PressureSV" Description="顯影主槽1前3噴壓力"/>
+		<Item SVID="504046" Port="50005" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7"Round="2" Name="MainTank1Front 4 PressureSV" Description="顯影主槽1前4噴壓力"/>
+		<Item SVID="504047" Port="50006" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7"Round="2" Name="MainTank1Front 5 PressureSV" Description="顯影主槽1前5噴壓力"/>-->
+		<Item SVID="504002" Port="50007" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.8"Round="2" Name="MainTank1Back 1 PressureSV"  Description="顯影主槽1後1噴壓力"/>
+		<!--<Item SVID="504048" Port="50008" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.8"Round="2" Name="MainTank1Back 2 PressureSV"  Description="顯影主槽1後2噴壓力"/>
+		<Item SVID="504049" Port="50009" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.8"Round="2" Name="MainTank1Back 3 PressureSV"  Description="顯影主槽1後3噴壓力"/>
+		<Item SVID="504050" Port="50011" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.8"Round="2" Name="MainTank1Back 4 PressureSV"  Description="顯影主槽1後4噴壓力"/>
+		<Item SVID="504051" Port="50012" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.8"Round="2" Name="MainTank1Back 5 PressureSV"  Description="顯影主槽1後5噴壓力"/>-->
+		<Item SVID="504003" Port="40033" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Front 1 PressureSV"  Description="顯影主槽2前1噴壓力"/>
+		<!--<Item SVID="504052" Port="40034" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Front 2 PressureSV"  Description="顯影主槽2前2噴壓力"/>
+		<Item SVID="504053" Port="40035" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Front 3 PressureSV"  Description="顯影主槽2前3噴壓力"/>
+		<Item SVID="504054" Port="40036" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Front 4 PressureSV"  Description="顯影主槽2前4噴壓力"/>
+		<Item SVID="504055" Port="40037" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Front 5 PressureSV"  Description="顯影主槽2前5噴壓力"/>-->
+		<Item SVID="504004" Port="40039" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Back 1 PressureSV"   Description="顯影主槽2後1噴壓力"/>
+		<!--<Item SVID="504056" Port="40040" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Back 2 PressureSV"   Description="顯影主槽2後2噴壓力"/>
+		<Item SVID="504057" Port="40041" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Back 3 PressureSV"   Description="顯影主槽2後3噴壓力"/>
+		<Item SVID="504058" Port="40042" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Back 4 PressureSV"   Description="顯影主槽2後4噴壓力"/>
+		<Item SVID="504059" Port="40044" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Back 5 PressureSV"   Description="顯影主槽2後5噴壓力"/>-->
+		<!--<Item SVID="504060" Port="40065" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2-2Front 1 PressureSV"   Description="顯影主槽2-2前1噴壓設定值"/>
+		<Item SVID="504061" Port="40066" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2-2Front 2 PressureSV"   Description="顯影主槽2-2前2噴壓設定值"/>
+		<Item SVID="504062" Port="40067" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2-2Front 3 PressureSV"   Description="顯影主槽2-2前3噴壓設定值"/>
+		<Item SVID="504063" Port="40068" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2-2Back 1 PressureSV"    Description="顯影主槽2-2後1噴壓設定值"/>
+		<Item SVID="504064" Port="40069" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2-2Back 2 PressureSV"    Description="顯影主槽2-2後2噴壓設定值"/>
+		<Item SVID="504065" Port="40070" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2-2Back 3 PressureSV"    Description="顯影主槽2-2後3噴壓設定值"/>-->		
+		<Item SVID="504005" Port="27301" Adress="" Length="1" Unit="℃" Type="F" Scale="0.1"  Round="2"  Name="MainTankTempSV" Description="顯影主槽溫度設定值"/>
+		<Item SVID="504006" Port="40071" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7" Round="2" Name="ServiceTankFront 1 PressureSV" Description="顯影副槽前1噴壓力"/>
+		<!--<Item SVID="504066" Port="40072" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7" Round="2" Name="ServiceTankFront 2 PressureSV" Description="顯影副槽前2噴壓力"/>
+		<Item SVID="504067" Port="40073" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7" Round="2" Name="ServiceTankFront 3 PressureSV" Description="顯影副槽前3噴壓力"/>-->
+		<Item SVID="504007" Port="40074" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7" Round="2" Name="ServiceTankBack 1 PressureSV"  Description="顯影副槽後1噴壓力"/>
+		<!--<Item SVID="504068" Port="40075" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7" Round="2" Name="ServiceTankBack 2 PressureSV"  Description="顯影副槽後2噴壓力"/>
+		<Item SVID="504069" Port="40076" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7" Round="2" Name="ServiceTankBack 3 PressureSV"  Description="顯影副槽後3噴壓力"/>-->
+		<Item SVID="504008" Port="27321" Adress="" Length="1" Unit="℃" Type="F" Scale="0.1" Round="2"   Name="ServiceTankTempSV" Description="顯影副槽溫度設定值"/>
+		<Item SVID="504009" Port="41035" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10"Round="2"  Name="RoRinsingTank1FrontPressureSV" Description="RO水洗1前噴壓力"/>
+		<Item SVID="504010" Port="41036" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10"Round="2"  Name="RoRinsingTank1BackPressureSV" Description="RO水洗1後噴壓力"/>
+		<Item SVID="504011" Port="41037" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10"Round="2"  Name="RoRinsingTank2FrontPressureSV" Description="RO水洗2前噴壓力"/>
+		<Item SVID="504012" Port="41038" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10"Round="2"  Name="RoRinsingTank2BackPressureSV" Description="RO水洗2後噴壓力"/>
+		<Item SVID="504013" Port="41039" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10"Round="2"  Name="RoRinsingTank3FrontPressureSV" Description="RO水洗3前噴壓力"/>
+		<Item SVID="504014" Port="41040" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10"Round="2"  Name="RoRinsingTank3BackPressureSV" Description="RO水洗3後噴壓力"/>
+		<Item SVID="504015" Port="41041" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2"Name="ElectrolyticWaterTank1FrontPressureSV" Description="電解水洗1前噴壓力"/>
+		<Item SVID="504016" Port="41042" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="ElectrolyticWaterTank1BackPressureSV" Description="電解水洗1後噴壓力"/>
+		<Item SVID="504017" Port="41043" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2"Name="ElectrolyticWaterTank2FrontPressureSV"Description="電解水洗2前噴壓力"/>
+		<Item SVID="504018" Port="41044" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="ElectrolyticWaterTank2BackPressureSV"Description="電解水洗2後噴壓力"/>
+		<Item SVID="504019" Port="41065" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="DiRinsingTank1FrontPressureSV"Description="DI水洗1前噴壓力"/>
+		<Item SVID="504020" Port="41066" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="DiRinsingTank1BackPressureSV"Description="DI水洗1後噴壓力"/>
+		<Item SVID="504021" Port="41067" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="DiRinsingTank2FrontPressureSV"Description="DI水洗2前噴壓力"/>
+		<Item SVID="504022" Port="41068" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="DiRinsingTank2BackPressureSV"Description="DI水洗2後噴壓力"/>
+		<Item SVID="504023" Port="26900" Adress="" Length="1" Unit="m/min" Type="F" Scale="0.01 "Round="2" Name="LineSpeedSV"Description="輸送速度設定值"/>
+		<Item SVID="504024" Port="41101" Adress="" Length="1" Unit="us/cm" Type="S" Scale="20" Round="2" Name="DiRinsingTank1ConductivitySV"Description="DI水洗槽1電導度"/>
+		<Item SVID="504025" Port="41102" Adress="" Length="1" Unit="us/cm" Type="S" Scale="20" Round="2" Name="DiRinsingTank2ConductivitySV"Description="DI水洗槽2電導度"/>
+		<Item SVID="504026" Port="41033" Adress="" Length="1" Unit="Kgf/cm2" Type="S" Scale="6.666666666666667" Round="2" Name="RelayTankFrontAirCutPressureSV" Description="前風切差壓力"/>
+		<Item SVID="504027" Port="41034" Adress="" Length="1" Unit="Kgf/cm2" Type="S" Scale="6.666666666666667" Round="2" Name="RelayTankBackAirCutPressureSV" Description="後風切差壓力"/>
+		<Item SVID="504028" Port="41069" Adress="41069" Length="1" Unit="Kpa" Type="S" Scale="11.2" Round="2" Name="BlowAirTank1stFrontAirCutPressureSV"Description="吹乾槽第一組前風刀差壓"/>
+		<Item SVID="504029" Port="41075" Adress="41070" Length="1" Unit="Kpa" Type="S" Scale="10"   Round="2" Name="BlowAirTank1stBackAirCutPressureSV" Description="吹乾槽第一組後風刀差壓"/>
+		<Item SVID="504030" Port="41070" Adress="41071" Length="1" Unit="Kpa" Type="S" Scale="10.4" Round="2" Name="BlowAirTank2ndFrontAirCutPressureSV"Description="吹乾槽第二組前風刀差壓"/>
+		<Item SVID="504031" Port="41097" Adress="41072" Length="1" Unit="Kpa" Type="S" Scale="10.9" Round="2" Name="BlowAirTank2ndBackAirCutPressureSV" Description="吹乾槽第二組後風刀差壓"/>
+		<Item SVID="504032" Port="41071" Adress="41073" Length="1" Unit="Kpa" Type="S" Scale="10"   Round="2" Name="BlowAirTank3rdFrontAirCutPressureSV"Description="吹乾槽第三組前風刀差壓"/>
+		<Item SVID="504033" Port="41076" Adress="41074" Length="1" Unit="Kpa" Type="S" Scale="10.3" Round="2" Name="BlowAirTank3rdBackAirCutPressureSV" Description="吹乾槽第三組後風刀差壓"/>
+		<Item SVID="504034" Port="41072" Adress="41075" Length="1" Unit="Kpa" Type="S" Scale="10.4" Round="2" Name="BlowAirTank4thFrontAirCutPressureSV"Description="吹乾槽第四組前風刀差壓"/>
+		<Item SVID="504035" Port="41098" Adress="41076" Length="1" Unit="Kpa" Type="S" Scale="9.5"  Round="2" Name="BlowAirTank4thBackAirCutPressureSV" Description="吹乾槽第四組後風刀差壓"/>
+		<Item SVID="504036" Port="41073" Adress="41097" Length="1" Unit="Kpa" Type="S" Scale="9.1"  Round="2" Name="BlowAirTank5thFrontAirCutPressureSV"Description="吹乾槽第五組前風刀差壓"/>
+		<Item SVID="504037" Port="41099" Adress="41098" Length="1" Unit="Kpa" Type="S" Scale="10.7"   Round="2" Name="BlowAirTank5thBackAirCutPressureSV" Description="吹乾槽第五組後風刀差壓"/>
+		<Item SVID="504038" Port="41074" Adress="41099" Length="1" Unit="Kpa" Type="S" Scale="10.5" Round="2" Name="BlowAirTank6thFrontAirCutPressureSV"Description="吹乾槽第六組前風刀差壓"/>
+		<Item SVID="504039" Port="41100" Adress="41100" Length="1" Unit="Kpa" Type="S" Scale="11"   Round="2" Name="BlowAirTank6thBackAirCutPressureSV" Description="吹乾槽第六組後風刀差壓"/>
+	    <Item SVID="504040" Port="27341" Adress="" Length="1" Unit="℃" Type="F" Scale="0.1 "Round="2" Name="DryTankTempSV" Description="顯影烘乾溫度設定值"/>
+		<Item SVID="504041" Port="40005" Adress="" Length="1"Unit="L/min"Type="L"Scale="0.7453416149068323"Round="2"Name="RinsingTank1stWaterRefreshRateSV" Description="水洗1流量"/>
+		<Item SVID="504042" Port="40003" Adress="" Length="1" Unit="L/min" Type="L" Scale="0.5099679402722881" Round="2"  Name="RinsingTank2ndWaterRefreshRateSV" Description="水洗2流量"/>
+		<Item SVID="504043" Port="40001" Adress=""Length="1"Unit="L/min"Type="L"Scale="0.4609916450840843"Round="2"Name="RinsingTank3rdWaterRefreshRateSV" Description="水洗3流量"/>
+		<!--<Item SVID="302" Port="27261" Adress="" Length="1"Unit="" Type="D"	Scale=""Round=""Name="AutoDosingAmount" Description="送液量"/>
+		<Item SVID="303" Port="27271" Adress="" Length="1"Unit="" Type="D"	Scale=""Round=""Name="AutoDosingPanelQuantity" Description="值掛架"/>-->
+	</PPIDBODY>
+	<REAL>
+		<Item SVID="" Port="" Adress="" Length="1" Unit="" Type="A" Scale="" Name="RECIPE_NAME"/>
+		<Item SVID="504001" Port="50002" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7"Round="2" Name="MainTank1Front 1 PressureSV" Description="顯影主槽1前1噴壓力"/>
+		<!--<Item SVID="504044" Port="50003" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7"Round="2" Name="MainTank1Front 2 PressureSV" Description="顯影主槽1前2噴壓力"/>
+		<Item SVID="504045" Port="50004" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7"Round="2" Name="MainTank1Front 3 PressureSV" Description="顯影主槽1前3噴壓力"/>
+		<Item SVID="504046" Port="50005" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7"Round="2" Name="MainTank1Front 4 PressureSV" Description="顯影主槽1前4噴壓力"/>
+		<Item SVID="504047" Port="50006" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7"Round="2" Name="MainTank1Front 5 PressureSV" Description="顯影主槽1前5噴壓力"/>-->
+		<Item SVID="504002" Port="50007" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.8"Round="2" Name="MainTank1Back 1 PressureSV"  Description="顯影主槽1後1噴壓力"/>
+		<!--<Item SVID="504048" Port="50008" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.8"Round="2" Name="MainTank1Back 2 PressureSV"  Description="顯影主槽1後2噴壓力"/>
+		<Item SVID="504049" Port="50009" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.8"Round="2" Name="MainTank1Back 3 PressureSV"  Description="顯影主槽1後3噴壓力"/>
+		<Item SVID="504050" Port="50011" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.8"Round="2" Name="MainTank1Back 4 PressureSV"  Description="顯影主槽1後4噴壓力"/>
+		<Item SVID="504051" Port="50012" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.8"Round="2" Name="MainTank1Back 5 PressureSV"  Description="顯影主槽1後5噴壓力"/>-->
+		<Item SVID="504003" Port="40033" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Front 1 PressureSV"  Description="顯影主槽2前1噴壓力"/>
+		<!--<Item SVID="504052" Port="40034" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Front 2 PressureSV"  Description="顯影主槽2前2噴壓力"/>
+		<Item SVID="504053" Port="40035" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Front 3 PressureSV"  Description="顯影主槽2前3噴壓力"/>
+		<Item SVID="504054" Port="40036" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Front 4 PressureSV"  Description="顯影主槽2前4噴壓力"/>
+		<Item SVID="504055" Port="40037" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Front 5 PressureSV"  Description="顯影主槽2前5噴壓力"/>-->
+		<Item SVID="504004" Port="40039" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Back 1 PressureSV"   Description="顯影主槽2後1噴壓力"/>
+		<!--<Item SVID="504056" Port="40040" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Back 2 PressureSV"   Description="顯影主槽2後2噴壓力"/>
+		<Item SVID="504057" Port="40041" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Back 3 PressureSV"   Description="顯影主槽2後3噴壓力"/>
+		<Item SVID="504058" Port="40042" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Back 4 PressureSV"   Description="顯影主槽2後4噴壓力"/>
+		<Item SVID="504059" Port="40044" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2Back 5 PressureSV"   Description="顯影主槽2後5噴壓力"/>-->
+		<!--<Item SVID="504060" Port="40065" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2-2Front 1 PressureSV"   Description="顯影主槽2-2前1噴壓設定值"/>
+		<Item SVID="504061" Port="40066" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2-2Front 2 PressureSV"   Description="顯影主槽2-2前2噴壓設定值"/>
+		<Item SVID="504062" Port="40067" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2-2Front 3 PressureSV"   Description="顯影主槽2-2前3噴壓設定值"/>
+		<Item SVID="504063" Port="40068" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2-2Back 1 PressureSV"    Description="顯影主槽2-2後1噴壓設定值"/>
+		<Item SVID="504064" Port="40069" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2-2Back 2 PressureSV"    Description="顯影主槽2-2後2噴壓設定值"/>
+		<Item SVID="504065" Port="40070" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="MainTank2-2Back 3 PressureSV"    Description="顯影主槽2-2後3噴壓設定值"/>-->		
+		<Item SVID="504005" Port="27301" Adress="" Length="1" Unit="℃" Type="F" Scale="0.1"  Round="2"  Name="MainTankTempSV" Description="顯影主槽溫度設定值"/>
+		<Item SVID="504006" Port="40071" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7" Round="2" Name="ServiceTankFront 1 PressureSV" Description="顯影副槽前1噴壓力"/>
+		<!--<Item SVID="504066" Port="40072" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7" Round="2" Name="ServiceTankFront 2 PressureSV" Description="顯影副槽前2噴壓力"/>
+		<Item SVID="504067" Port="40073" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7" Round="2" Name="ServiceTankFront 3 PressureSV" Description="顯影副槽前3噴壓力"/>-->
+		<Item SVID="504007" Port="40074" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7" Round="2" Name="ServiceTankBack 1 PressureSV"  Description="顯影副槽後1噴壓力"/>
+		<!--<Item SVID="504068" Port="40075" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7" Round="2" Name="ServiceTankBack 2 PressureSV"  Description="顯影副槽後2噴壓力"/>
+		<Item SVID="504069" Port="40076" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="9.7" Round="2" Name="ServiceTankBack 3 PressureSV"  Description="顯影副槽後3噴壓力"/>-->
+		<Item SVID="504008" Port="27321" Adress="" Length="1" Unit="℃" Type="F" Scale="0.1" Round="2"   Name="ServiceTankTempSV" Description="顯影副槽溫度設定值"/>
+		<Item SVID="504009" Port="41035" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10"Round="2"  Name="RoRinsingTank1FrontPressureSV" Description="RO水洗1前噴壓力"/>
+		<Item SVID="504010" Port="41036" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10"Round="2"  Name="RoRinsingTank1BackPressureSV" Description="RO水洗1後噴壓力"/>
+		<Item SVID="504011" Port="41037" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10"Round="2"  Name="RoRinsingTank2FrontPressureSV" Description="RO水洗2前噴壓力"/>
+		<Item SVID="504012" Port="41038" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10"Round="2"  Name="RoRinsingTank2BackPressureSV" Description="RO水洗2後噴壓力"/>
+		<Item SVID="504013" Port="41039" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10"Round="2"  Name="RoRinsingTank3FrontPressureSV" Description="RO水洗3前噴壓力"/>
+		<Item SVID="504014" Port="41040" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10"Round="2"  Name="RoRinsingTank3BackPressureSV" Description="RO水洗3後噴壓力"/>
+		<Item SVID="504015" Port="41041" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2"Name="ElectrolyticWaterTank1FrontPressureSV" Description="電解水洗1前噴壓力"/>
+		<Item SVID="504016" Port="41042" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="ElectrolyticWaterTank1BackPressureSV" Description="電解水洗1後噴壓力"/>
+		<Item SVID="504017" Port="41043" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2"Name="ElectrolyticWaterTank2FrontPressureSV"Description="電解水洗2前噴壓力"/>
+		<Item SVID="504018" Port="41044" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="ElectrolyticWaterTank2BackPressureSV"Description="電解水洗2後噴壓力"/>
+		<Item SVID="504019" Port="41065" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="DiRinsingTank1FrontPressureSV"Description="DI水洗1前噴壓力"/>
+		<Item SVID="504020" Port="41066" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="DiRinsingTank1BackPressureSV"Description="DI水洗1後噴壓力"/>
+		<Item SVID="504021" Port="41067" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="DiRinsingTank2FrontPressureSV"Description="DI水洗2前噴壓力"/>
+		<Item SVID="504022" Port="41068" Adress="" Length="1" Unit="Kg/cm2" Type="S" Scale="10" Round="2" Name="DiRinsingTank2BackPressureSV"Description="DI水洗2後噴壓力"/>
+		<Item SVID="504023" Port="26900" Adress="" Length="1" Unit="m/min" Type="F" Scale="0.01 "Round="2" Name="LineSpeedSV"Description="輸送速度設定值"/>
+		<Item SVID="504024" Port="41101" Adress="" Length="1" Unit="us/cm" Type="S" Scale="20" Round="2" Name="DiRinsingTank1ConductivitySV"Description="DI水洗槽1電導度"/>
+		<Item SVID="504025" Port="41102" Adress="" Length="1" Unit="us/cm" Type="S" Scale="20" Round="2" Name="DiRinsingTank2ConductivitySV"Description="DI水洗槽2電導度"/>
+		<Item SVID="504026" Port="41033" Adress="" Length="1" Unit="Kgf/cm2" Type="S" Scale="6.666666666666667" Round="2" Name="RelayTankFrontAirCutPressureSV" Description="前風切差壓力"/>
+		<Item SVID="504027" Port="41034" Adress="" Length="1" Unit="Kgf/cm2" Type="S" Scale="6.666666666666667" Round="2" Name="RelayTankBackAirCutPressureSV" Description="後風切差壓力"/>
+		<Item SVID="504028" Port="41069" Adress="41069" Length="1" Unit="Kpa" Type="S" Scale="11.2" Round="2" Name="BlowAirTank1stFrontAirCutPressureSV"Description="吹乾槽第一組前風刀差壓"/>
+		<Item SVID="504029" Port="41075" Adress="41070" Length="1" Unit="Kpa" Type="S" Scale="10"   Round="2" Name="BlowAirTank1stBackAirCutPressureSV" Description="吹乾槽第一組後風刀差壓"/>
+		<Item SVID="504030" Port="41070" Adress="41071" Length="1" Unit="Kpa" Type="S" Scale="10.4" Round="2" Name="BlowAirTank2ndFrontAirCutPressureSV"Description="吹乾槽第二組前風刀差壓"/>
+		<Item SVID="504031" Port="41097" Adress="41072" Length="1" Unit="Kpa" Type="S" Scale="10.9" Round="2" Name="BlowAirTank2ndBackAirCutPressureSV" Description="吹乾槽第二組後風刀差壓"/>
+		<Item SVID="504032" Port="41071" Adress="41073" Length="1" Unit="Kpa" Type="S" Scale="10"   Round="2" Name="BlowAirTank3rdFrontAirCutPressureSV"Description="吹乾槽第三組前風刀差壓"/>
+		<Item SVID="504033" Port="41076" Adress="41074" Length="1" Unit="Kpa" Type="S" Scale="10.3" Round="2" Name="BlowAirTank3rdBackAirCutPressureSV" Description="吹乾槽第三組後風刀差壓"/>
+		<Item SVID="504034" Port="41072" Adress="41075" Length="1" Unit="Kpa" Type="S" Scale="10.4" Round="2" Name="BlowAirTank4thFrontAirCutPressureSV"Description="吹乾槽第四組前風刀差壓"/>
+		<Item SVID="504035" Port="41098" Adress="41076" Length="1" Unit="Kpa" Type="S" Scale="9.5"  Round="2" Name="BlowAirTank4thBackAirCutPressureSV" Description="吹乾槽第四組後風刀差壓"/>
+		<Item SVID="504036" Port="41073" Adress="41097" Length="1" Unit="Kpa" Type="S" Scale="9.1"  Round="2" Name="BlowAirTank5thFrontAirCutPressureSV"Description="吹乾槽第五組前風刀差壓"/>
+		<Item SVID="504037" Port="41099" Adress="41098" Length="1" Unit="Kpa" Type="S" Scale="10.7"   Round="2" Name="BlowAirTank5thBackAirCutPressureSV" Description="吹乾槽第五組後風刀差壓"/>
+		<Item SVID="504038" Port="41074" Adress="41099" Length="1" Unit="Kpa" Type="S" Scale="10.5" Round="2" Name="BlowAirTank6thFrontAirCutPressureSV"Description="吹乾槽第六組前風刀差壓"/>
+		<Item SVID="504039" Port="41100" Adress="41100" Length="1" Unit="Kpa" Type="S" Scale="11"   Round="2" Name="BlowAirTank6thBackAirCutPressureSV" Description="吹乾槽第六組後風刀差壓"/>
+	    <Item SVID="504040" Port="27341" Adress="" Length="1" Unit="℃" Type="F" Scale="0.1 "Round="2" Name="DryTankTempSV" Description="顯影烘乾溫度設定值"/>
+		<Item SVID="504041" Port="40005" Adress="" Length="1"Unit="L/min"Type="L"Scale="0.7453416149068323"Round="2"Name="RinsingTank1stWaterRefreshRateSV" Description="水洗1流量"/>
+		<Item SVID="504042" Port="40003" Adress="" Length="1" Unit="L/min" Type="L" Scale="0.5099679402722881" Round="2"  Name="RinsingTank2ndWaterRefreshRateSV" Description="水洗2流量"/>
+		<Item SVID="504043" Port="40001" Adress=""Length="1"Unit="L/min"Type="L"Scale="0.4609916450840843"Round="2"Name="RinsingTank3rdWaterRefreshRateSV" Description="水洗3流量"/>
+		<!--<Item SVID="302" Port="27261" Adress="" Length="1"Unit="" Type="D"	Scale=""Round=""Name="AutoDosingAmount" Description="送液量"/>
+		<Item SVID="303" Port="27271" Adress="" Length="1"Unit="" Type="D"	Scale=""Round=""Name="AutoDosingPanelQuantity" Description="值掛架"/>-->
+	</REAL>
+	<LAMP>
+		<Item SVID="" Port="" Adress="" Length="1" Unit="" Type="D" Scale="" Name="RED"/>
+		<Item SVID="" Port="" Adress="" Length="1" Unit="" Type="D" Scale="" Name="YELLOW"/>
+		<Item SVID="" Port="" Adress="" Length="1" Unit="" Type="D" Scale="" Name="GREEN"/>
+	</LAMP>
+	<PANELPOS>
+		<Item SVID="" Port="" Adress="" Length="1" Unit="" Type="D" Scale="" Name="POS1" Description="入料段"/>
+		<Item SVID="" Port="" Adress="" Length="1" Unit="" Type="D" Scale="" Name="POS2" Description="真空段"/>
+		<Item SVID="" Port="" Adress="" Length="1" Unit="" Type="D" Scale="" Name="POS3" Description="壓膜段"/>
+		<Item SVID="" Port="" Adress="" Length="1" Unit="" Type="D" Scale="" Name="POS4" Description="出料段"/>
+	</PANELPOS>
+	<COUNTPOS>
+		<Item SVID="" Port="22" Adress="22" Length="1" Unit="" Type="D" Scale="" Name="COUNTPOS" Description="COUNT_POS"/>
+	</COUNTPOS>
+	<CURRENTRECIPE>
+		<Item SVID="" Port="" Adress="" Length="1" Unit="" Type="D" Scale="" Name="CurrentSelectRecipeNo"/>
+	</CURRENTRECIPE>
+	<LOCK>
+		<Item SVID="" Port="20" Adress="20" Length="1" Unit="" Type="D" Scale=""Name="LOCK_POS"/>
+	</LOCK>
+	<CHECKLOCK>
+	    <Item SVID="" Port="2343" Adress="2343" Length="1" Unit="" Type="D" Scale=""Name="CHECKLOCK"/>
+	</CHECKLOCK>
+	<ALIVE>
+		<Item SVID="" Port="10" Adress="10" Length="1" Unit="" Type="D" Scale=""Name="ALIVE"/>
+	</ALIVE>
+	<DEV4>
+		<Item SVID="" Port="10502" Adress="" Length="1" Unit="" Type="D" Scale=""Name="DEV4"/>	
+	</DEV4>
+	<FLOW>
+		<Item SVID="504041" Port="40005" Adress=""Length="1"Unit="L/min"Type="L"Scale="0.7453416149068323"Round="2"Name="RinsingTank1stWaterRefreshRateSV" Description="水洗1流量"/>
+		<Item SVID="504042" Port="40003" Adress="" Length="1" Unit="L/min" Type="L" Scale="0.5099679402722881" Round="2"  Name="RinsingTank2ndWaterRefreshRateSV" Description="水洗2流量"/>
+		<Item SVID="504043" Port="40001" Adress=""Length="1"Unit="L/min"Type="L"Scale="0.4609916450840843"Round="2"Name="RinsingTank3rdWaterRefreshRateSV" Description="水洗3流量"/>
+	</FLOW>
+</DATA>
