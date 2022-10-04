@@ -9,6 +9,9 @@ PLCIO 新增Tpye =DW 功能，用於換算後烤1風速計實際數值
 <Item SVID="XXXX" Port="XXX57" Adress="" Length="2" Unit="℃" Type="DW" Round="1" Scale="0.0001" Name="Anemomter4thActualWindSpeed" Description="風速計4實際數值"/>
 
 
+MoveOut 需要工程權限才能按下  0為不啟用  1為啟用
+[AutoSighout]
+DoMOVEOUT_CHECK=0
 
 ___________________________________________________________________________________________________________
 20220928 修改項目
