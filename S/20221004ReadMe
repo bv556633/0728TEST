@@ -1,3 +1,16 @@
+20221004 修改項目
+
+
+PLCIO 新增Tpye =DW 功能，用於換算後烤1風速計實際數值
+
+<Item SVID="XXXX" Port="XXX57" Adress="" Length="2" Unit="℃" Type="DW" Round="1" Scale="0.0001" Name="Anemomter1stActualWindSpeed" Description="風速計1實際數值"/>
+<Item SVID="XXXX" Port="XXX57" Adress="" Length="2" Unit="℃" Type="DW" Round="1" Scale="0.0001" Name="Anemomter2ndActualWindSpeed" Description="風速計2實際數值"/>
+<Item SVID="XXXX" Port="XXX57" Adress="" Length="2" Unit="℃" Type="DW" Round="1" Scale="0.0001" Name="Anemomter3rdActualWindSpeed" Description="風速計3實際數值"/>
+<Item SVID="XXXX" Port="XXX57" Adress="" Length="2" Unit="℃" Type="DW" Round="1" Scale="0.0001" Name="Anemomter4thActualWindSpeed" Description="風速計4實際數值"/>
+
+
+
+___________________________________________________________________________________________________________
 20220928 修改項目
 
 DEV4 作業中開始前增加Delay
