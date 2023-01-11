@@ -1,6 +1,12 @@
 20230111修改項目(Var 2.0.1.0)
 1.新增Reader 利用PLC讀取，SECS Gateway透過PLC讀取Reader結果
 
+PLCFlagIn 為進料PLC的旗標判斷
+PLC2DListIn 為進料讀取到的暫存，長度再請依照實際狀況設定
+
+PLCFlagOut為出料PLC的旗標判斷
+PLC2DListOut為出料讀取到的暫存，長度再請依照實際狀況設定
+
 PLCIO增加
 
 <PLC2D>
@@ -9,6 +15,7 @@ PLCIO增加
 		<Item SVID="" Port="1209" Adress="" Length="1" Unit="" Type="D" Scale=""Round="2" Name="PLCFlagOut"/>
 		<Item SVID="" Port="1210" Adress="" Length="1" Unit="" Type="A" Scale=""Round="2" Name="PLC2DListOut"/>
 	</PLC2D>
+
 
 INI增加
 0為原始、 1為PLC
