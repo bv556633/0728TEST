@@ -1,3 +1,28 @@
+20230111修改項目(Var 2.0.1.0)
+1.新增Reader 利用PLC讀取，SECS Gateway透過PLC讀取Reader結果
+
+PLCIO增加
+
+<PLC2D>
+		<Item SVID="" Port="1200" Adress="" Length="1" Unit="" Type="D" Scale=""Round="2" Name="PLCFlagIn"/>
+		<Item SVID="" Port="1205" Adress="" Length="3" Unit="" Type="A" Scale=""Round="2" Name="PLC2DListIn"/>
+		<Item SVID="" Port="1209" Adress="" Length="1" Unit="" Type="D" Scale=""Round="2" Name="PLCFlagOut"/>
+		<Item SVID="" Port="1210" Adress="" Length="1" Unit="" Type="A" Scale=""Round="2" Name="PLC2DListOut"/>
+	</PLC2D>
+
+INI增加
+0為原始、 1為PLC
+[Read2DType]
+Type=1
+
+
+2.新增S2F41 Stop指令功能
+
+
+__________________________________________________________________________________________________________________________________
+
+
+
 20221219修改項目(Var 2.0.0.3)
 1.做完後Move Out有時無法按下問題修正
 
