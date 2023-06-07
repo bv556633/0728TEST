@@ -1,3 +1,34 @@
+20230607修改項目(Var 2.0.2.5)
+1.新增Reader 利用PLC讀取，SECS Gateway透過PLC讀取Reader結果
+
+PLCFlagIn 為進料PLC的旗標判斷
+PLC2DListIn 為進料讀取到的暫存，長度再請依照實際狀況設定
+
+PLCFlagOut為出料PLC的旗標判斷
+PLC2DListOut為出料讀取到的暫存，長度再請依照實際狀況設定
+
+PLCIO增加
+
+<PLC2D>
+		<Item SVID="" Port="1200" Adress="" Length="1" Unit="" Type="D" Scale=""Round="2" Name="PLCFlagIn"/>
+		<Item SVID="" Port="1205" Adress="" Length="3" Unit="" Type="A" Scale=""Round="2" Name="PLC2DListIn"/>
+		<Item SVID="" Port="1209" Adress="" Length="1" Unit="" Type="D" Scale=""Round="2" Name="PLCFlagOut"/>
+		<Item SVID="" Port="1210" Adress="" Length="1" Unit="" Type="A" Scale=""Round="2" Name="PLC2DListOut"/>
+	</PLC2D>
+
+
+INI增加
+0為原始、 1為PLC
+[Read2DType]
+Type=1
+
+2.修正Local OK不會賦歸問題
+
+
+
+__________________________________________________________________________________________________________________________________
+
+
 20230605修改項目(Var 2.0.2.4)
 1.Local 模式需要按Excel後才能按OK
 2.單獨S站MoveOut需輸入，設定如下
