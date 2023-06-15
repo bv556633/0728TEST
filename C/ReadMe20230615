@@ -2,8 +2,8 @@
 1.2D Reader Load and Unload Type 
 
 [Read2DType]
-TypeIn=1
-TypeOutn=1
+InType=1
+OutType=1
 
 2.PLC type不會有Log修正
 
